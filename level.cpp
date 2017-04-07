@@ -38,13 +38,18 @@ level::~level() {
 
 }
 
-void level::render(SDL_Renderer* render) {
+void level::render(SDL_Renderer* render, double x) {
     // render each at proper location
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 50; j++) {
-            if (lev_data[i][j] > 0) {
-                tile->setframe(lev_data[i][j] - 1);
-                tile->render(j * TILE_DIM, i * TILE_DIM, render);
+    // for each col
+    for (int j = 0; j < 50; j++) {
+        // if col in screen
+        if (j * TILE_DIM > x - TILE_DIM && j * TILE_DIM < x + SCR_W) {
+            // render col
+            for (int i = 0; i < 9; i++) {
+                if (lev_data[i][j] > 0) {
+                    tile->setframe(lev_data[i][j] - 1);
+                    tile->render(j * TILE_DIM - (int) x, i * TILE_DIM, render);
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ public:
     // free level
     ~level();
     // render level
-    void render(SDL_Renderer* render);
+    void render(SDL_Renderer* render, double x);
 private:
     // level
     int lev;

@@ -20,6 +20,9 @@ void loop(game* g) {
         bool onGround = false;
     } d;
 
+    // Camera coord
+    double camx = 0;
+
     // Initialize control variables
     cont controls;
     controls.up = false;
@@ -111,15 +114,22 @@ void loop(game* g) {
             d.xv = d.xv * RESISTANCE;
         if ((d.xv < .25 && d.xv > 0) or (d.xv > -.25 && d.xv < 0))
             d.xv = 0;
+        if (d.x < 0)
+            d.x = 0;
+
+        // Find camera
+        if (d.x > SCR_W / 2)
+            camx = d.x - SCR_W / 2;
+        if (camx > (TILE_DIM * 50) - SCR_W)
+            camx = TILE_DIM * 50 - SCR_W;
 
         //RENDERING BELOW
         // clear frame
         g->clear();
 
         // render all
-        //d.render();
-        dog.render((int) d.x, (int) d.y, g->getRender());
-        lvl1.render(g->getRender());
+        dog.render((int) d.x - (int) camx, (int) d.y, g->getRender());
+        lvl1.render(g->getRender(), camx);
 
         // draw frame to screen
         g->draw();
