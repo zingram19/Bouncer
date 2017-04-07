@@ -11,6 +11,6 @@ find_package(SDL2_image REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${PROJECT_SOURCE_DIR}/inc)
 
-add_executable(bouncer main.cpp game.cpp game.h main.h loop.cpp const.h texture.cpp texture.h controls.cpp level.cpp level.h)
+add_executable(bouncer main.cpp game.cpp inc/game.h inc/main.h loop.cpp inc/const.h texture.cpp inc/texture.h controls.cpp level.cpp inc/level.h)
 
 target_link_libraries(bouncer ${SDL2_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_IMAGE_LIBRARY})

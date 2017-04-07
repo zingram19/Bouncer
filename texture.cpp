@@ -9,7 +9,10 @@ texture::texture(const char *path, SDL_Renderer* renderer) {
     initalized = false;
     txture = NULL;
     SDL_Surface* loader = NULL;
-    loader = IMG_Load(path);
+    char rPath[] = "resources/\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
+    memcpy(rPath + 10, path, strlen(path));
+    std::cout << rPath << std::endl;
+    loader = IMG_Load(rPath);
     if (loader == NULL)
         std::cout << "Unable to load img ERR = " << IMG_GetError() << std::endl;
     else {
