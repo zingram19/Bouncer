@@ -11,7 +11,7 @@
 class level {
 public:
     // get level & load & pass in textures
-    level(int lnum, texture* text);
+    level(char lnum, texture* text);
     // free level
     ~level();
     // render level

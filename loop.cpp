@@ -1,7 +1,5 @@
 // Event loop for game
 #include "main.h"
-#include "const.h"
-#include "level.h"
 
 void loop(game* g) {
     // Loading graphics in
@@ -118,7 +116,6 @@ void loop(game* g) {
         // clear frame
         g->clear();
 
-        // TODO
         // render all
         //d.render();
         dog.render((int) d.x, (int) d.y, g->getRender());

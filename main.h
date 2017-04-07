@@ -11,6 +11,7 @@
 // classes
 #include "game.h"
 #include "texture.h"
+#include "level.h"
 
 // functions
 void loop(game* g);
