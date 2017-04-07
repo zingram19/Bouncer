@@ -1,10 +1,15 @@
 // Event loop for game
 #include "main.h"
 #include "const.h"
+#include "level.h"
 
 void loop(game* g) {
-    // Load graphics in
-    // TODO
+    // Loading graphics in
+    // Load in tiles
+    texture tiles("Tiles.png", g->getRender());
+    tiles.settilesize(16, 16);
+    // Load in level 1
+    level lvl1(1, &tiles);
 
     // Load dog in
     texture dog("Dog.png", g->getRender());
@@ -16,10 +21,6 @@ void loop(game* g) {
         double xv = 0, yv = 0;
         bool onGround = false;
     } d;
-
-    // Load tile textures in
-    texture tiles("Tiles.png", g->getRender());
-    tiles.settilesize(16, 16);
 
     // Initialize control variables
     cont controls;
@@ -121,6 +122,7 @@ void loop(game* g) {
         // render all
         //d.render();
         dog.render((int) d.x, (int) d.y, g->getRender());
+        lvl1.render(g->getRender());
 
         // draw frame to screen
         g->draw();

@@ -7,7 +7,7 @@
 
 // Screen dimensions
 #define SCR_W 1024
-#define SCR_H 590
+#define SCR_H 576
 #define IMG_SCALE 4
 
 // Types for functions
@@ -31,5 +31,7 @@ typedef struct {
 #define GRAVITY .5
 #define RESISTANCE .75
 
+// Tiles (to reduce calculations/frame)
+#define TILE_DIM 64
 
 #endif //BOUNCER_CONST_H

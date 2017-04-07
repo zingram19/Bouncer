@@ -10,18 +10,18 @@
 
 class level {
 public:
-    // get level
-    level(int lnum);
+    // get level & load & pass in textures
+    level(int lnum, texture* text);
     // free level
     ~level();
-
-    void addTiles(texture* text);
-
+    // render level
+    void render(SDL_Renderer* render);
 private:
     // level
     int lev;
-
+    // texture holding tile sprites
     texture* tile;
+    char lev_data[9][50];
 };
 
 
