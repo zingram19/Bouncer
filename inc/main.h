@@ -16,5 +16,6 @@
 // functions
 void loop(game* g);
 void handleInput(SDL_Event* e, cont* controls);
+void dogControl(cont* controls, d_t* d, texture* dog);
 
 #endif //BOUNCER_MAIN_H

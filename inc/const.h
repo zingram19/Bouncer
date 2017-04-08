@@ -17,7 +17,15 @@ typedef struct {
     bool down;
     bool left;
     bool right;
+    bool reload;
+    bool newtext;
 } cont;
+
+// Dog wrapper
+typedef struct {
+    double x,y,xv,yv;
+    bool onGround;
+} d_t;
 
 // Movement modifications
 // dog
@@ -33,5 +41,6 @@ typedef struct {
 
 // Tiles (to reduce calculations/frame)
 #define TILE_DIM 64
+#define LEVEL_W 50
 
 #endif //BOUNCER_CONST_H

@@ -16,6 +16,8 @@ public:
     ~level();
     // render level
     void render(SDL_Renderer* render, double x);
+    // Reload level
+    void reload();
 private:
     // level
     int lev;

@@ -20,7 +20,7 @@ level::level(char lnum, texture* text) {
         while (getline(file, line)) {
             // copy line by line level into array
             if (row < 9)
-                memcpy(lev_data[row], line.c_str(), 50);
+                memcpy(lev_data[row], line.c_str(), LEVEL_W);
             row++;
         }
         file.close();
@@ -28,7 +28,7 @@ level::level(char lnum, texture* text) {
 
     // convert ASCII to numbers
     for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 50; j++) {
+        for (int j = 0; j < LEVEL_W; j++) {
             lev_data[i][j] -= '0';
         }
     }
@@ -41,7 +41,7 @@ level::~level() {
 void level::render(SDL_Renderer* render, double x) {
     // render each at proper location
     // for each col
-    for (int j = 0; j < 50; j++) {
+    for (int j = 0; j < LEVEL_W; j++) {
         // if col in screen
         if (j * TILE_DIM > x - TILE_DIM && j * TILE_DIM < x + SCR_W) {
             // render col
@@ -51,6 +51,31 @@ void level::render(SDL_Renderer* render, double x) {
                     tile->render(j * TILE_DIM - (int) x, i * TILE_DIM, render);
                 }
             }
+        }
+    }
+}
+
+void level::reload() {
+    char name[] = "lvl0";
+    name[3] = (char) lev + '0';
+    string line;
+    // open file
+    ifstream file(name);
+    int row = 0;
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            // copy line by line level into array
+            if (row < 9)
+                memcpy(lev_data[row], line.c_str(), LEVEL_W);
+            row++;
+        }
+        file.close();
+    }
+
+    // convert ASCII to numbers
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < LEVEL_W; j++) {
+            lev_data[i][j] -= '0';
         }
     }
 }
