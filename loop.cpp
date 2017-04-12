@@ -6,12 +6,14 @@ void loop(game* g) {
     // TODO PLS NO GET MAD AT ME IS ONLY FOR DEBUG
     RESET:;
 
+    // Starting level (default 1)
+    char levNum = 1;
     // Loading graphics in
     // Load in tiles
     texture tiles("Tiles.png", g->getRender());
     tiles.settilesize(16, 16);
     // Load in level 1
-    level lvl(1, &tiles);
+    level lvl(levNum, &tiles);
 
     // Load dog in
     texture dog("Dog.png", g->getRender());
@@ -24,6 +26,10 @@ void loop(game* g) {
 
     // Camera coord
     double camx = 0;
+
+    // Load Background in
+    texture bg("Bg.png", g->getRender());
+    bg.settilesize(144, 144);
 
     // Initialize control variables
     cont controls;
@@ -94,14 +100,29 @@ void loop(game* g) {
         g->clear();
 
         // render all
+        // BG
+        int bgx = (int) -(camx / 4);
+        while (bgx < SCR_W) {
+            bg.render(bgx, 0, g->getRender());
+            bgx +=  bg.width * IMG_SCALE;
+        }
+        // Dog
         dog.render((int) d.x - (int) camx, (int) d.y, g->getRender());
+        // Level
         lvl.render(g->getRender(), camx);
 
         // Death animation
-        if (frame) {
+        if (frame > 0) {
+            // Red of different opacity
             SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0x00, 0x00, frame * (Uint8)4);
+            // Fill screen
             SDL_RenderFillRect(g->getRender(), NULL);
+            // next frame
             frame--;
+        }
+        // Next level animation
+        else if (frame < 0) {
+
         }
 
         // draw frame to screen
