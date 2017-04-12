@@ -66,26 +66,41 @@ void handleInput(SDL_Event* e, cont* controls) {
 }
 
 void dogControl(cont* controls, d_t* d, texture* dog) {
+    // Resistance calcs & zeroing
+    d->xv -= d->xv / 6;
+    if (controls->down)
+        d->xv = d->xv * RESISTANCE;
+    if ((d->xv < .25 && d->xv > 0) or (d->xv > -.25 && d->xv < 0))
+        d->xv = 0;
+    if (d->x < 0)
+        d->x = 0;
+
+    // jump
+    if (d->onGround && controls->up) {
+        d->yv = D_JUMP_MAX;
+        d->onGround = false;
+    }
+
     // L/R control application
     if (controls->right) {
         d->xv += D_WALK_SPEED;
         // walkin jump
         if (d->onGround && !controls->up && !controls->down) {
-            d->onGround = false;
             d->yv = D_WALK_J;
         }
         if (controls->down)
             d->xv -= D_CWALK_SPEED;
+        d->onGround = false;
     }
     if (controls->left) {
         d->xv -= D_WALK_SPEED;
         // walkin jump
         if (d->onGround && !controls->up && !controls->down) {
-            d->onGround = false;
             d->yv = D_WALK_J;
         }
         if (controls->down)
             d->xv += D_CWALK_SPEED;
+        d->onGround = false;
     }
 
     // Point the right way
@@ -104,10 +119,6 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
     if ((((controls->left or controls->right) && !controls->down) or controls->up) && (dog->getFrame() % 2))
         dog->setframe(dog->getFrame() - 1);
 
-
-
-
-
     // gravity
     if (!d->onGround) {
         d->yv += GRAVITY;
@@ -120,25 +131,8 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
         d->onGround = true;
     }
 
-    // jump
-    if (d->onGround && controls->up) {
-        d->yv = D_JUMP_MAX;
-        d->onGround = false;
-    }
-
     // variable jump here
     if (!d->onGround && !controls->up && d->yv < D_JUMP_MIN) {
         d->yv = D_JUMP_MIN;
     }
-
-    // apply velocities
-    d->x += d->xv;
-    d->y += d->yv;
-    d->xv -= d->xv / 6;
-    if (controls->down)
-        d->xv = d->xv * RESISTANCE;
-    if ((d->xv < .25 && d->xv > 0) or (d->xv > -.25 && d->xv < 0))
-        d->xv = 0;
-    if (d->x < 0)
-        d->x = 0;
 }
