@@ -43,4 +43,7 @@ typedef struct {
 #define TILE_DIM 64
 #define LEVEL_W 50
 
+
+#define DOG_W 44
+
 #endif //BOUNCER_CONST_H
