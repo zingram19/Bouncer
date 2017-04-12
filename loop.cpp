@@ -20,7 +20,7 @@ void loop(game* g) {
 
     // Dog wrapper and values
     d_t d;
-    d.x = 50; d.y = 50; d.xv = 0; d.yv = 0; d.onGround = false;
+    d.x = 140; d.y = 50; d.xv = 0; d.yv = 0; d.onGround = false;
 
     // Camera coord
     double camx = 0;
@@ -29,6 +29,9 @@ void loop(game* g) {
     cont controls;
     controls.up = false; controls.down = false; controls.left = false;
     controls.right = false; controls.reload = false;
+
+    // Animation counter for death animation
+    Uint8 frame = 0;
 
     // To break out of game
     bool running = true;
@@ -59,11 +62,32 @@ void loop(game* g) {
         // Move dog
         dogControl(&controls, &d, &dog);
 
+        // apply velocities
+        d.x += d.xv;
+        d.y += d.yv;
+
+        // detect collisions
+        lvl.detectCollision(&d);
+
         // Find camera
-        if (d.x > SCR_W / 2)
+        if (d.x > SCR_W / 2) {
             camx = d.x - SCR_W / 2;
+        }
+        else {
+            camx = 0;
+        }
         if (camx > (TILE_DIM * LEVEL_W) - SCR_W)
             camx = TILE_DIM * LEVEL_W - SCR_W;
+
+        // Start death
+        if (d.y == SCR_H - DOG_W) {
+            frame = 64;
+            d.x = 140;
+            d.y = 50;
+            d.xv = 0;
+            d.yv = 0;
+            d.onGround = false;
+        }
 
         //RENDERING BELOW
         // clear frame
@@ -72,6 +96,13 @@ void loop(game* g) {
         // render all
         dog.render((int) d.x - (int) camx, (int) d.y, g->getRender());
         lvl.render(g->getRender(), camx);
+
+        // Death animation
+        if (frame) {
+            SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0x00, 0x00, frame * (Uint8)4);
+            SDL_RenderFillRect(g->getRender(), NULL);
+            frame--;
+        }
 
         // draw frame to screen
         g->draw();
