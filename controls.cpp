@@ -72,8 +72,6 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
         d->xv = d->xv * RESISTANCE;
     if ((d->xv < .25 && d->xv > 0) or (d->xv > -.25 && d->xv < 0))
         d->xv = 0;
-    if (d->x < 0)
-        d->x = 0;
     if (d->x > 48 * TILE_DIM)
         d->x = 48 * TILE_DIM;
 
@@ -137,4 +135,8 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
     if (!d->onGround && !controls->up && d->yv < D_JUMP_MIN) {
         d->yv = D_JUMP_MIN;
     }
+
+    // Segmentation fault land to the left fix
+    if (d->x < 0)
+        d->x = 0;
 }
