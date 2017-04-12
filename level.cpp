@@ -195,3 +195,7 @@ void level::detectCollision(d_t* d) {
         }
     }
 }
+
+void level::setLev(int level) {
+    lev = level;
+}
