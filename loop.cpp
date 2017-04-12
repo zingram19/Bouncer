@@ -88,7 +88,7 @@ void loop(game* g) {
             camx = TILE_DIM * LEVEL_W - SCR_W;
 
         // Start death
-        if (d.y == SCR_H - DOG_W) {
+        if (d.y >= SCR_H - DOG_W) {
             frame = 64;
             d.x = 140;
             d.y = 50;
@@ -131,7 +131,7 @@ void loop(game* g) {
         else if (frame < 0) {
             if (lvup) {
                 // White transition
-                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8)(frame + 256));
+                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8 (frame + 256)));
                 SDL_RenderFillRect(g->getRender(), NULL);
                 if (frame == -1) {
                     lvup = false;
@@ -150,7 +150,7 @@ void loop(game* g) {
                 }
             }
             else {
-                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8) (-1 * frame));
+                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8 (-1 * frame)));
                 SDL_RenderFillRect(g->getRender(), NULL);
                 frame++;
             }
