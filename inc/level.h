@@ -18,6 +18,10 @@ public:
     void render(SDL_Renderer* render, double x);
     // Reload level
     void reload();
+    // Detect corner of collision
+    int detectCollisionCor(d_t* d);
+    // Detect collision and move player
+    void detectCollision(d_t* d);
 private:
     // level
     int lev;
