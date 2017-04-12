@@ -8,6 +8,8 @@ void loop(game* g) {
 
     // Starting level (default 1)
     char levNum = 1;
+    // Bool for leveling up
+    bool lvup = false;
     // Loading graphics in
     // Load in tiles
     texture tiles("Tiles.png", g->getRender());
@@ -37,7 +39,7 @@ void loop(game* g) {
     controls.right = false; controls.reload = false;
 
     // Animation counter for death animation
-    Uint8 frame = 0;
+    int frame = 0;
 
     // To break out of game
     bool running = true;
@@ -94,6 +96,11 @@ void loop(game* g) {
             d.yv = 0;
             d.onGround = false;
         }
+        // check for win
+        if (d.x > (TILE_DIM * LEVEL_W) - 256 && !lvup) {
+            lvup = true;
+            frame = -255;
+        }
 
         //RENDERING BELOW
         // clear frame
@@ -114,7 +121,7 @@ void loop(game* g) {
         // Death animation
         if (frame > 0) {
             // Red of different opacity
-            SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0x00, 0x00, frame * (Uint8)4);
+            SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0x00, 0x00, (Uint8)frame * (Uint8)4);
             // Fill screen
             SDL_RenderFillRect(g->getRender(), NULL);
             // next frame
@@ -122,7 +129,31 @@ void loop(game* g) {
         }
         // Next level animation
         else if (frame < 0) {
-
+            if (lvup) {
+                // White transition
+                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8)(frame + 256));
+                SDL_RenderFillRect(g->getRender(), NULL);
+                if (frame == -1) {
+                    lvup = false;
+                    frame = -255;
+                    levNum++;
+                    d.x = 140;
+                    d.y = 50;
+                    d.xv = 0;
+                    d.yv = 0;
+                    d.onGround = false;
+                    lvl.setLev(levNum);
+                    lvl.reload();
+                }
+                else {
+                    frame++;
+                }
+            }
+            else {
+                SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0xFF, 0xFF, (Uint8) (-1 * frame));
+                SDL_RenderFillRect(g->getRender(), NULL);
+                frame++;
+            }
         }
 
         // draw frame to screen
