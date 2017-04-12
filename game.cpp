@@ -15,6 +15,7 @@ game::game() {
             std::cout << "Renderer not created ERR = " << SDL_GetError() << std::endl;
         else {
             SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
             if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
                 std::cout << "SDL_Image not loaded ERR = " << SDL_GetError() << std::endl;
             }
