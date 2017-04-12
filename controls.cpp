@@ -124,13 +124,6 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
         d->yv += GRAVITY;
     }
 
-    // land on bottom TODO land on platform
-    if (d->y > SCR_H - (dog->height * IMG_SCALE)) {
-        d->y = SCR_H - (dog->height * IMG_SCALE);
-        d->yv = 0;
-        d->onGround = true;
-    }
-
     // variable jump here
     if (!d->onGround && !controls->up && d->yv < D_JUMP_MIN) {
         d->yv = D_JUMP_MIN;
