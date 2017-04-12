@@ -22,6 +22,8 @@ public:
     int detectCollisionCor(d_t* d);
     // Detect collision and move player
     void detectCollision(d_t* d);
+    // set level
+    void setLev(int level);
 private:
     // level
     int lev;
