@@ -74,6 +74,8 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
         d->xv = 0;
     if (d->x < 0)
         d->x = 0;
+    if (d->x > 48 * TILE_DIM)
+        d->x = 48 * TILE_DIM;
 
     // jump
     if (d->onGround && controls->up) {
@@ -84,7 +86,7 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
     // L/R control application
     if (controls->right) {
         d->xv += D_WALK_SPEED;
-        // walkin jump
+        // walking jump
         if (d->onGround && !controls->up && !controls->down) {
             d->yv = D_WALK_J;
         }
@@ -94,7 +96,7 @@ void dogControl(cont* controls, d_t* d, texture* dog) {
     }
     if (controls->left) {
         d->xv -= D_WALK_SPEED;
-        // walkin jump
+        // walking jump
         if (d->onGround && !controls->up && !controls->down) {
             d->yv = D_WALK_J;
         }
