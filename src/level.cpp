@@ -11,8 +11,8 @@ level::level(char lnum, texture* text) {
     lev = lnum;
     tile = text;
     // Name of level file
-    char name[] = "lvl0";
-    name[3] = lnum + '0';
+    char name[] = "resources/lvl0";
+    name[13] = lnum + '0';
     string line;
     // open file
     ifstream file(name);
@@ -57,8 +57,9 @@ void level::render(SDL_Renderer* render, double x) {
 }
 
 void level::reload() {
-    char name[] = "lvl0";
-    name[3] = (char) lev + '0';
+    // Same as init func
+    char name[] = "resources/lvl0";
+    name[13] = (char)lev + '0';
     string line;
     // open file
     ifstream file(name);

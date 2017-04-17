@@ -12,7 +12,7 @@ Written in C++ using SDL
 - [x] Collision
 - [x] Multi-level
 - [ ] Background story
-- [ ] Bug free (as far as I know)
+- [x] Bug free (as far as I know)
 - [x] Win screen
 - [ ] Start screen
 - [ ] Audio
