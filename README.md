@@ -14,5 +14,5 @@ Written in C++ using SDL
 - [ ] Background story
 - [x] Bug free (as far as I know)
 - [x] Win screen
-- [ ] Start screen
-- [ ] Audio
+- [x] Start screen
+- [x] Audio
