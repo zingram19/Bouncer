@@ -16,3 +16,16 @@ Written in C++ using SDL
 - [x] Win screen
 - [x] Start screen
 - [x] Audio
+
+## Citations
+- https://github.com/tcbrindle/sdl2-cmake-scripts
+FindSDL2, FindSDL2_image, FindSDL2_ttf files for importing libraries
+
+- https://github.com/ksterker/adonthell/blob/master/config/FindSDL2_mixer.cmake
+FindSDL2_mixer.cmake for importing SDL_mixer
+
+- http://ericskiff.com/music/
+Music credit (Song: Underclocked)
+
+- https://opengameart.org/content/seamless-cave-background
+Background texture
