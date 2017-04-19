@@ -3,8 +3,8 @@
 #include "main.h"
 
 void loop(game* g) {
-    // TODO PLS NO GET MAD AT ME IS ONLY FOR DEBUG
-    RESET:;
+    // Used for DEBUG ONLY
+//    RESET:;
 
     // Show controls
     g->clear();
@@ -69,15 +69,21 @@ void loop(game* g) {
             else
                 handleInput(&e, &controls);
         }
-        // TODO REMOVE RESET CODE
-        if (controls.reload) {
-            lvl.~level();
-            tiles.~texture();
-            dog.~texture();
-            goto RESET;
-        }
+        // Used for DEBUG ONLY
+//        if (controls.reload) {
+//            lvl.~level();
+//            tiles.~texture();
+//            dog.~texture();
+//            goto RESET;
+//        }
         if (controls.newtext) {
             lvl.reload();
+            frame = 64;
+            d.x = 140;
+            d.y = 50;
+            d.xv = 0;
+            d.yv = 0;
+            d.onGround = false;
         }
 
         // Move dog
