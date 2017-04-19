@@ -43,7 +43,7 @@ void level::render(SDL_Renderer* render, double x) {
     // render each at proper location
     // for each col
     for (int j = 0; j < LEVEL_W; j++) {
-        // if col in screen
+        // if col in screens
         if (j * TILE_DIM > x - TILE_DIM && j * TILE_DIM < x + SCR_W) {
             // render col
             for (int i = 0; i < 9; i++) {
