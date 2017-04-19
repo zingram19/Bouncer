@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
+#include <SDL_mixer.h>
 
 #include "const.h"
 #include "texture.h"
@@ -24,6 +25,8 @@ public:
     void draw(void);
     // fetch renderer
     SDL_Renderer* getRender(void);
+    // fetch music
+    Mix_Music* getMusic(void);
 private:
     // window
     SDL_Window* window;
@@ -31,6 +34,8 @@ private:
     SDL_Renderer* renderer;
     // init success val
     bool initialized;
+    // Music holder
+    Mix_Music* music;
 };
 
 
