@@ -6,6 +6,15 @@ void loop(game* g) {
     // TODO PLS NO GET MAD AT ME IS ONLY FOR DEBUG
     RESET:;
 
+    // Show controls
+    g->clear();
+    texture ss("StartScreen.png", g->getRender());
+    ss.settilesize((uint8_t) 255, (uint8_t) 144);
+    ss.setframe(0);
+    ss.render(0, 0, g->getRender());
+    g->draw();
+    SDL_Delay(5000);
+
     // Starting level (default 1)
     char levNum = 1;
     // Bool for leveling up
@@ -32,11 +41,15 @@ void loop(game* g) {
     // Load Background in
     texture bg("Bg.png", g->getRender());
     bg.settilesize(144, 144);
+    bg.setframe(0);
 
     // Initialize control variables
     cont controls;
     controls.up = false; controls.down = false; controls.left = false;
     controls.right = false; controls.reload = false;
+
+    // Start music
+    Mix_PlayMusic(g->getMusic(), -1);
 
     // Animation counter for death animation
     int frame = 0;
@@ -121,7 +134,7 @@ void loop(game* g) {
         // Death animation
         if (frame > 0) {
             // Red of different opacity
-            SDL_SetRenderDrawColor(g->getRender(), 0xFF, 0x00, 0x00, (Uint8)frame * (Uint8)4);
+            SDL_SetRenderDrawColor(g->getRender(), 0x8B, 0x00, 0x00, (Uint8)frame * (Uint8)4);
             // Fill screen
             SDL_RenderFillRect(g->getRender(), NULL);
             // next frame
