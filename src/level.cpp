@@ -160,7 +160,7 @@ void level::detectCollision(d_t* d) {
     }
     //TR
     else if (col & 2) {
-        if ((int) d->x % TILE_DIM > TILE_DIM - ((int) d->y % 64)) {
+        if ((int) d->x % TILE_DIM > 18 + TILE_DIM - ((int) d->y % 64)) {
             d->y = (1 + (int) d->y / TILE_DIM) * TILE_DIM;
             d->yv = 1;
         }
@@ -172,7 +172,7 @@ void level::detectCollision(d_t* d) {
     //BL
     else if (col & 4) {
         // collided on bottom of dog
-        if ((TILE_DIM - ((int) d->x % TILE_DIM)) + 8 > (int) d->y % 64) {
+        if (TILE_DIM - ((int) d->x % TILE_DIM) + 18 > (int) d->y % 64) {
             d->y = (1 + (int) d->y / TILE_DIM) * TILE_DIM - DOG_W;
             d->yv = 0;
             d->onGround = true;

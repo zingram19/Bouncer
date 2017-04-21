@@ -3,10 +3,10 @@
 #ifndef BOUNCER_GAME_H
 #define BOUNCER_GAME_H
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
 #include <iostream>
-#include <SDL_mixer.h>
+#include <SDL2_mixer/SDL_mixer.h>
 
 #include "const.h"
 #include "texture.h"

@@ -1,5 +1,5 @@
 // Event loop for game
-#include <const.h>
+#include "const.h"
 #include "main.h"
 
 void loop(game* g) {
@@ -116,7 +116,7 @@ void loop(game* g) {
             d.onGround = false;
         }
         // check for win
-        if (d.x > (TILE_DIM * LEVEL_W) - 256 && !lvup) {
+        if (d.x > (TILE_DIM * LEVEL_W) - 256 && frame >= 0) {
             lvup = true;
             frame = -255;
         }
